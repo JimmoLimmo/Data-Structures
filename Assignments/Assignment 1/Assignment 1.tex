@@ -1,0 +1,166 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{listings}
+\usepackage{xcolor}   % For adding colors to listings
+\usepackage{amsmath}  % For math notation
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\usepackage{titling}
+\usepackage{verbatim} 
+\usepackage{blindtext}
+\usepackage{geometry}
+\usepackage{array}
+
+\geometry{
+ a4paper,
+ total={165mm,257mm},
+% left=20mm,
+ top=30mm,
+ bottom=20mm
+ }
+% Configure listings
+\lstset{
+  language=Java,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  frame=single,
+  breaklines=true,
+  captionpos=b,
+  tabsize=2,
+  showspaces=false,
+  showstringspaces=false
+}
+
+\begin{document}
+
+\pagestyle{fancy}
+
+\fancyhf{} %clear existing header/footer
+\renewcommand{\headrulewidth}{0pt}
+\lhead{CS-3353-23334 Data Structures}
+\rhead{Jimmy Nguyen}
+\rfoot{\thepage}
+
+\newenvironment{myindentpar}[1]%
+ {\begin{list}{}%
+         {\setlength{\leftmargin}{#1}}%
+         \item[]%
+ }
+ {\end{list}}
+
+\section*{Part 1: Big-O Notation}
+For each of the following code snippets, determine the Big-O time complexity and explain your reasoning:
+\subsection*{\underline {Code 1}}
+
+\begin{lstlisting}
+public void example1(int[] arr) 
+{
+  for (int i = 0; i < arr.length; i++) 
+  {
+    for (int j = i; j < arr.length; j++) 
+    {
+      System.out.println(arr[i] + arr[j]);
+    } 
+  }
+}
+\end{lstlisting}
+\textbf{Solution:}
+\begin{myindentpar}{.5cm}
+The Big-O time complexity of Code 1 is \(O(n^2)\) where n is equal to arr.length. The outer for loop runs from i = 0 to i < arr.length, which means it iterates n times. The inner for loop runs from j = 1 to j < arr.length, which means it runs n times for every iteration of the outer loop. The 1 represents the line of code in the nested for loop that only iterates once. So the total number of iterations is n(n(1)) or \(n^2\).
+\end{myindentpar}
+
+\subsection*{\underline{Code 2}}
+
+\begin{lstlisting}
+public void example2(int[] arr) 
+{
+  for (int i = 0; i < arr.length; i++) 
+  {
+    if (arr[i] % 2 == 0) 
+    {
+      System.out.println(arr[i]);
+    }
+  }
+}
+\end{lstlisting}
+\textbf{Solution:} 
+\begin{myindentpar}{.5cm}
+The Big-O time complexity of Code 2 is \(O(n)\) where n is the length of arr. The for loop iterates from 0 to i < arr.length, meaning that it runs n times, where n is arr.length. Inside the loop there is an if statement that operates for the duration of the loop. The print statement in the if statement also iterates for the duration of the loop. Since the loop runs n times, the time complexity is \(O(n)\)
+\end{myindentpar}
+
+\pagebreak
+
+ \subsection*{\underline{Code 3}}
+
+\begin{lstlisting}
+public void example3(int n) 
+{
+  int i = 1;
+  while (i < n) 
+  {
+    System.out.println(i);
+    i *= 2;
+  }
+}
+\end{lstlisting}
+\textbf{Solution:} 
+\begin{myindentpar}{.5cm}
+The Big-O time complexity of Code 3 is O(log n). The while loop iterates where i starts at 1 and doubles itself until i is $\geq$ n. Because i doubles every iteration, after x iterations, i \( = 2^n \). Because the loop only runs while i < n, we need to solve \(2^x \geq n\) to determine when the loop stops. Taking the log on both sides gives us \(x \geq log_2(n)\). This gives us a time complexity of O(log n). \\
+\end{myindentpar}
+
+\section*{Part 2: Time Complexity}
+\subsection*{\underline{A. Algorithm Analysis:}}
+Consider \textbf{arr} is a reference to an unsorted array, analyze the following function: 
+\begin{lstlisting}
+public boolean search(int[] arr, int target) 
+{
+  for (int i = 0; i < arr.length; i++) 
+  {
+    if (arr[i] == target) 
+    {
+      return true;
+    }
+  }
+  return false;
+}
+\end{lstlisting}
+What is the time complexity of the best-case and worst-case scenarios for this search?\\ \\
+\textbf{Solution:}
+\begin{myindentpar}{.5cm}
+\textbf{Best-Case:} O(1)
+\begin{myindentpar}{.5cm}
+    If target is the first index then the function returns true immediately.
+\end{myindentpar}
+\textbf{Worst-Case:} O(n) if n is equal to the length of the array
+\begin{myindentpar}{.5cm}
+    If the target is not present or in the last index, then the loop runs n times.
+\end{myindentpar}
+\end{myindentpar}
+
+\subsection*{\underline{B. Algorithm Comparison:}}
+Three algorithms solve the same problem:
+\begin{itemize}
+    \item Algorithm A: \(O(N^2)\)
+    \item Algorithm B: \(O(n\log n)\)
+    \item Algorithm C: \(O(n!)\)
+\end{itemize}
+Which algorithm would you choose and why? Provide a detailed explanation comparing their performance as \(n\) grows.\\ \\
+\textbf{Solution:}
+\begin{myindentpar}{.5cm}
+    I would Choose Algorithm B:\(O(n\log n)\). As seen from the table below
+\end{myindentpar}
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    &\(O(N^2)\)&\(O(n\log n)\) &\(O(n!)\) \\ [0,5ex]
+    \hline\hline
+    n & 
+    
+    \end{tabular}
+\end{center}
+\end{document}
