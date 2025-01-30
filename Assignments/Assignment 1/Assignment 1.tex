@@ -141,26 +141,97 @@ What is the time complexity of the best-case and worst-case scenarios for this s
     If the target is not present or in the last index, then the loop runs n times.
 \end{myindentpar}
 \end{myindentpar}
-
+\pagebreak
 \subsection*{\underline{B. Algorithm Comparison:}}
 Three algorithms solve the same problem:
 \begin{itemize}
-    \item Algorithm A: \(O(N^2)\)
+    \item Algorithm A: \(O(n^2)\)
     \item Algorithm B: \(O(n\log n)\)
     \item Algorithm C: \(O(n!)\)
 \end{itemize}
 Which algorithm would you choose and why? Provide a detailed explanation comparing their performance as \(n\) grows.\\ \\
 \textbf{Solution:}
 \begin{myindentpar}{.5cm}
-    I would Choose Algorithm B:\(O(n\log n)\). As seen from the table below
+    I would Choose Algorithm B: \(O(n\log n)\). As seen from the table below, as \(n\) grows the time complexity grows the slowest with \(O(n\log n)\) so it is the most optimal out of the three algorithms. 
 \end{myindentpar}
 \begin{center}
-    \begin{tabular}{|c|c|c|c|}
+    \begin{tabular}{|c||c|c|c|}
     \hline
-    &\(O(N^2)\)&\(O(n\log n)\) &\(O(n!)\) \\ [0,5ex]
-    \hline\hline
-    n & 
+    n&\(O(n^2)\)&\(O(n\log n)\) &\(O(n!)\) \\ [0,5ex]
+    \hline
+    1 & 1 & 0 & 1 \\
+    2 & 4 & .06 & 2 \\
+    3 & 9 & 1.4 & 6 \\ 
+    4 & 16 & 2.4 & 24 \\
+    5 & 25 & 3.5 & 120 \\
+    \hline
+    
     
     \end{tabular}
 \end{center}
+
+\section*{Part 3: Space Complexity}
+Consider the following function:
+\begin{lstlisting}
+public int[] doubleValues(int[] arr)
+{
+  int[] result = new int[arr.length];
+  for (int i = 0; i < arr.length; i++) 
+  {
+    result[i] = arr[i] * 2;
+  }
+  return result;
+}
+\end{lstlisting}
+\begin{itemize}
+    \item [--] What is the space complexity of this function?
+    \item [--] Suggest an alternative approach to reduce the space complexity if applicable.
+\end{itemize}
+\textbf{Solution:}
+\begin{myindentpar}{.5cm}
+    The space complexity of this function is \(O(n)\) where n is equal to the length of the array. This is because the function creates a new array \textit{result} the same size as \textit{arr}, so amount of memory used grows linearly every iteration. \\ \\
+    You can reduce the space complexity by modifying the input array rather than creating a new array. The code for this is shown below.
+    \begin{lstlisting}
+public int doubleValues(int[] arr) 
+{
+  for (int i = 0; i < arr.length; i++) 
+  {
+    arr[i] *= 2;
+  }
+  return result;
+}
+    \end{lstlisting}
+\end{myindentpar}
+
+\pagebreak
+
+\section*{Part 4: Design Algorithm}
+Design an algorithm to find the second largest number in an array with the time complexity of \(O(n)\) and a space complexity of \(O(1)\). Provide your implementation and explain how it meets the time and space complexity requirements. \\ \\
+\textbf{IMPLEMENTATION GUIDELINES} 
+\begin{itemize}
+    \item [--]Your approach must achieve a time complexity of \(O(n)\) by avoiding nested loops and ensuring each element in the array is processed only once. Nested loop approaches result in \(O(n^2)\) time complexity, which is less efficient and does not meet the requirements.
+    \item [--]Your code should use a single loop statement, but there is no limit on the number of conditional statements (e.g., if).
+    \item[--]Your implementation should handle arrays of any size without limitations.
+    \item[--] Built-in methods such as max should not be used. Finding the largest element must be done using conditional statements to compare array elements
+\end{itemize}
+
+\noindent{\textbf{Solution :}}\\
+\begin{lstlisting}
+class SecondLargestFinder {
+    public int findSecondLargest(int[] arr) {
+        int largest = Integer.MIN_VALUE, secondLargest = Integer.MIN_VALUE;
+        for (int num : arr) {
+            if (num > largest) {
+                secondLargest = largest;
+                largest = num;
+            } else if (num > secondLargest && num < largest) {
+                secondLargest = num;
+            }
+        }
+        return secondLargest;
+    }
+}
+
+\end{lstlisting}
+
 \end{document}
